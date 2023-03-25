@@ -1,12 +1,16 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import eslintPlugin from "vite-plugin-eslint";
-import vuetify from "@vuetify/vite-plugin";
-import path from "path";
-
+import vuetify from "vite-plugin-vuetify";
+import {resolve} from "path";
+import Components from 'unplugin-vue-components/vite'
+import {
+  Vuetify3Resolver
+} from 'unplugin-vue-components/resolvers'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    Components({resolvers: [Vuetify3Resolver()]}),
     vue(),
     eslintPlugin(),
     vuetify({
@@ -16,7 +20,7 @@ export default defineConfig({
   define: { "process.env": {} },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": resolve(__dirname, "src"),
     },
   },
 });
